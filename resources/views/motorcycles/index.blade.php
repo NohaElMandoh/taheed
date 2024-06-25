@@ -25,44 +25,38 @@
         </div>
     </div>
 </div>
-<div class="row m-1">
+<div class="row m-1 mb-2">
+    <div class="col-xl-3 col-md-6 col-sm-6 p-2">
+        <div class="box-card text-right mini animate__animated animate__flipInY   "><i class="fab far fa-chart-bar b-first" aria-hidden="true"></i>
+            <span class="mb-1 c-first mt-4">عدد الدراجات النارية الـمتاحة للشراء  </span>
+            @php
+            $moto_count=0;
+            @endphp
+            @foreach($motorcycles as $key=>$motorcycle)
+            @php $moto_count +=$motorcycle->amount;       @endphp
+           @endforeach
+            <span>{{$moto_count}}</span>
 
-    <div class="col-xs-1 col-sm-1 col-md-12 col-lg-12 p-2">
-        <div class="card shade h-100">
-            <div class="card-body">
-                <h5 class="card-title">الدراجات النارية </h5>
-
-                <hr>
-                <table id="users-table" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col"># </th>
-                            <th scope="col">اسم المصنع </th>
-                            <th scope="col">الموديل </th>
-                            <th scope="col">الكمية </th>
-                            <th scope="col">تاريخ التسجيل</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($motorcycles as $key=>$motorcycle)
-
-                        <tr>
-                            <th scope="row">{{$key+1}}</th>
-                            <td>{{$motorcycle->manufacturer}}</td>
-                            <td>{{$motorcycle->model}}</td>
-                            <td>{{$motorcycle->amount}}</td>
-                            <td>{{$motorcycle->created_at}}</td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-                <div align="right" id="paglink">{{$motorcycles->appends(request()->input())->links('pagination::bootstrap-4')}}</div>
-
-            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 col-sm-6 p-2">
+        <div class="box-card text-right mini animate__animated animate__flipInY    "><i class="fab far fa-clock b-second" aria-hidden="true"></i>
+            <span class="mb-1 c-second mt-4">اجمالي  الدراجات الناريةالمباعه  الشهرية   </span>
+            
+            <span>{{$totalCount}}</span>
 
         </div>
     </div>
 
+    <div class="col-xl-3 col-md-6 col-sm-6 p-2">
+        <div class="box-card text-right mini animate__animated animate__flipInY    "><i class="fab far fa-clock b-second" aria-hidden="true"></i>
+            <span class="mb-1 c-second mt-4">اجمالي ايجارات الدراجات النارية الشهرية        </span>
+            
+            <span>{{$totalAmount}}</span>
+
+        </div>
+    </div>
+
+  
 </div>
 @endsection

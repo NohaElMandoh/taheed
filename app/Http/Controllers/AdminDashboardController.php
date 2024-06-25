@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Motorcycle;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -46,7 +47,12 @@ class AdminDashboardController extends Controller
      return redirect()->back()->withInput($request->only('email', 'remember'));
  }
  public function dashboard(Request $request){
-    return view('admin.dashboard');
+        $clients = User::where('role', 'client')->with('orders')->get();
+        $clientsWithCompletedOrdersCount = User::where('role', 'client')->whereHas('orders', function($query) {
+            $query->where('status', 'completed');
+        })->count();
+        $motorcycles = Motorcycle::get();
+    return view('admin.dashboard',compact('clients','clientsWithCompletedOrdersCount','motorcycles'));
  }
  public function logout(Request $request)
  {

@@ -19,8 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 // Authentication Routes
 
-Route::post('register', 'App\Http\Controllers\API\Auth\RegisterController@register');
-Route::post('login', 'App\Http\Controllers\API\Auth\LoginController@login');
+Route::post('register', 'App\Http\Controllers\API\Auth\RegisterController@register'); /// first step
+Route::post('verify', 'App\Http\Controllers\API\Auth\VerificationController@verify')->middleware('auth:sanctum'); /// second step
 
-// Verification Code Route
-Route::post('verify', 'App\Http\Controllers\API\Auth\VerificationController@verify');
+Route::post('update_phone', 'App\Http\Controllers\API\Auth\RegisterController@update_phone')->middleware('auth:sanctum');/// third  step
+Route::post('update_info', 'App\Http\Controllers\API\Auth\RegisterController@update_info')->middleware('auth:sanctum');/// fourth  step
+
+Route::post('createOrder', 'App\Http\Controllers\API\Auth\OrderController@createOrder')->middleware('auth:sanctum');/// create order  step
+

@@ -23,7 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
      'verification_code',
-     'email_verified_at','status'
+     'email_verified_at','status',
+     'phone','nationali_id'
     ];
 
     /**
@@ -55,5 +56,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function motorcycles()
     {
         return $this->belongsToMany(Motorcycle::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
